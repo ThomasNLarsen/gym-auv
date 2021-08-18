@@ -1,10 +1,10 @@
 # gym-auv
 
-Python simulation framework for Collision Avoidance for Unmanned Surface Vehicle using Deep Reinforcement Learning.
+A Python simulation framework for Collision Avoidance for Unmanned Surface Vehicle using Deep Reinforcement Learning.
 
-An explanation of the software structure can be found in Eivind Meyers repository [gym-auv](https://github.com/EivMeyer)
+The detailed explanation of the software structure can be found in Eivind Meyers repository [gym-auv](https://github.com/EivMeyer)
 
-## Getting Started
+## Prerequisites
 Note: Requires Python 3.7
 
 Note: Pybullet needs Microsoft Visual C++ 14.0. Install it with "Build Tools for Visual Studio".
@@ -25,26 +25,27 @@ Then run
 ```
 pip install -e ./gym-auv/
 ```
-
+## Running the code
 You can now execute the script by running 
 ```
-python run.py <mode> <env>
+python run.py <mode> <env> <-modifier kwarg>
 ``` 
 The run script can be executed with the -h flag for a comprehensive overview of the available usage modes.
 
-Examples:
+### Examples:
+Manual control (arrow keys), quit by pressing "q".
 ```
 python run.py play TestScenario1-v0
-``` 
+```
+Train a PPO agent in the MovingObstaclesNoRules environment.
 ```
 python run.py train MovingObstaclesNoRules-v0
 ``` 
+Record a video of a trained policy acting in an environment.
 ```
-python run.py enjoy MovingObstaclesNoRules-v0 --algo algorithm --agent path\to\agent.pkl
+python run.py enjoy MovingObstaclesNoRules-v0 --algo <default:ppo> --agent path\to\agent.pkl
 ``` 
-
-
-## Known bugs
-
-* terrain.npy is missing from "resources/" because github does not support uploading large files. (reach out for a copy of this file)
-* Lots of deprecation warnings because of TensorFlow 1
+Evaluate a trained agent in an environment.
+```
+python run.py test MovingObstaclesNoRules-v0 --algo ppo --agent path\to\agent.pkl --episodes 1
+``` 
